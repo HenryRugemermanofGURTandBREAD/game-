@@ -1,3 +1,5 @@
+import time
+
 WIDTH = 500
 HEIGHT = 300
 
@@ -13,8 +15,17 @@ def update():
     if urmum.left > WIDTH:
         urmum.right = 0
 
+
+
 def on_mouse_down(pos):
     if urmum.collidepoint(pos):
-        print("Eek!")
-    else:
-        print("You missed me!")
+        set_character_hurt()
+
+def set_character_normal():
+    urmum.image = 'character'
+
+def set_character_hurt():
+    urmum.image = 'character_clicked'
+    sounds.eep.play()
+    clock.schedule_unique(set_character_normal, 1.0)
+
